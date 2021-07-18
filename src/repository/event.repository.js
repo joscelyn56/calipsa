@@ -9,8 +9,8 @@
  * @private
  */
 const Utils = require('../utils/utils')
+const Logger = require('../utils/logger')
 const EventData = require('./../../public/data.1626170682.json')
-const fs = require('fs')
 
 /**
  * Module exports
@@ -45,6 +45,8 @@ EventRepository.prototype.getLocations = async (req, res) => {
 		const selectedLocations = locations.slice(offset, end)
 		
 		let pagination = Utils.paginate(locations.length, page, limit)
+		
+		await Logger.append(req)
 		
 		if (locations.length > 0)
 			return res.status(200).json({
@@ -111,6 +113,8 @@ EventRepository.prototype.getEvents = async (req, res) => {
 		const selectedEvents = events.slice(offset, end)
 		
 		let pagination = Utils.paginate(events.length, page, limit)
+		
+		await Logger.append(req)
 		
 		if (events.length > 0)
 			return res.status(200).json({
