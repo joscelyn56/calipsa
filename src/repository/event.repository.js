@@ -28,15 +28,25 @@ function EventRepository() {
 /**
  * @memberof EventRepository
  * @instance
- * Get all location
+ * Get all locations
  * @return	{json} response
  */
 EventRepository.prototype.getLocations = async (req, res) => {
+	let limit = parseInt(req.query.limit) || 25
+	let page = parseInt(req.query.page) || 1
+	
 	try {
+		const offset = (page === 1) ? 0 : (page - 1) * limit;
+		const end = offset + limit;
 		const locations = EventData.locations;
+		const selectedLocations = locations.slice(offset, end)
+		
+		let pagination = Utils.paginate(locations.length, page, limit)
+		
 		if (locations.length > 0)
 			return res.status(200).json({
-				payload: locations
+				payload: selectedLocations,
+				pagination
 			})
 		return res.status(200).json({
 			message: "No locations found in the system.",
@@ -56,6 +66,9 @@ EventRepository.prototype.getLocations = async (req, res) => {
  * @return	{json} response
  */
 EventRepository.prototype.getEvents = async (req, res) => {
+	let limit = parseInt(req.query.limit) || 25
+	let page = parseInt(req.query.page) || 1
+	
 	try {
 		const events = EventData.alarms;
 		if (events.length > 0)

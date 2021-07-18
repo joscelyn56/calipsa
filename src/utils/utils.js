@@ -20,6 +20,8 @@ module.exports.hashString = hashString
 module.exports.compareHashedString = compareHashedString
 module.exports.getDateOnlyAsString = getDateOnlyAsString
 module.exports.getTimeOnlyAsString = getTimeOnlyAsString
+module.exports.paginate = paginate
+
 
 /**
  * @function
@@ -84,4 +86,21 @@ function hashString(data) {
  */
 function compareHashedString(data, hash) {
 	return (bcrypt.compareSync(data, hash)) ? true : false
+}
+
+function paginate(total, page, limit) {
+	let next_page = page + 1
+	let prev_page = (page > 1) ? page - 1 : page
+	let total_pages = Math.ceil(total / limit)
+	if (next_page > total_pages) next_page = total_pages
+	let offset = (page === 1) ? 0 : (page - 1) * limit
+	
+	return {
+		offset,
+		limit,
+		current_page: page,
+		next_page,
+		prev_page,
+		total_pages
+	}
 }
