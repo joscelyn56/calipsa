@@ -9,8 +9,8 @@
  * @private
  */
 const Utils = require('../utils/utils')
-const Users = require('./../services/user.service')
-const EventData = require('./../../public/data.1626170682.json');
+const EventData = require('./../../public/data.1626170682.json')
+const fs = require('fs')
 
 /**
  * Module exports
@@ -37,10 +37,10 @@ EventRepository.prototype.getLocations = async (req, res) => {
 	let search = req.query.search
 	
 	try {
-		const offset = (page === 1) ? 0 : (page - 1) * limit;
-		const end = offset + limit;
+		const offset = (page === 1) ? 0 : (page - 1) * limit
+		const end = offset + limit
 		
-		let locations = EventData.locations;
+		let locations = EventData.locations
 		if (search) locations = locations.filter(location => location.name.toLowerCase().includes(search.toLowerCase()))
 		const selectedLocations = locations.slice(offset, end)
 		
@@ -77,10 +77,10 @@ EventRepository.prototype.getEvents = async (req, res) => {
 	let end_time = req.query.end_time
 	
 	try {
-		const offset = (page === 1) ? 0 : (page - 1) * limit;
-		const end = offset + limit;
+		const offset = (page === 1) ? 0 : (page - 1) * limit
+		const end = offset + limit
 		
-		let events = EventData.alarms;
+		let events = EventData.alarms
 		
 		if (location) events = events.filter(event => event.location == location)
 		if (outcome) {

@@ -16,7 +16,7 @@ verifyToken = (req, res, next) => {
 		})
 	}
 	
-	const loginToken = token.split(" ")[1];
+	const loginToken = token.split(" ")[1]
 	
 	jwt.verify(loginToken, config.secret, (err, decoded) => {
 		if (err) {

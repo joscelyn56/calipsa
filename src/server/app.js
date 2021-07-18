@@ -29,12 +29,12 @@ app.use(session({
 }))
 
 function customHeaders(req, res, next) {
-    app.disable('x-powered-by');
-    res.setHeader('X-Powered-By', 'Callipsa');
-    next();
+    app.disable('x-powered-by')
+    res.setHeader('X-Powered-By', 'Callipsa')
+    next()
 }
 
-app.use(customHeaders);
+app.use(customHeaders)
 
 const mongoose = require('./../config/db/mongodb')
 // Connecting to the database
