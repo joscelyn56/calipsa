@@ -28,6 +28,5 @@ async function append(request) {
 		if (err) {
 			console.log("Logging failed")
 		}
-		console.log(description)
 	})
 }
