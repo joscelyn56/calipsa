@@ -10,7 +10,7 @@
  */
 const Utils = require('../utils/utils')
 const Users = require('./../services/user.service')
-const fs = require('fs');
+const EventData = require('./../../public/data.1626170682.json');
 
 /**
  * Module exports
@@ -33,8 +33,10 @@ function EventRepository() {
  */
 EventRepository.prototype.getLocations = async (req, res) => {
 	try {
+		const locations = EventData.locations;
 		return res.status(200).json({
-			message: "No locations found in the system."
+			message: "No locations found in the system.",
+			payload: locations
 		})
 	} catch (err) {
 		console.error(err)
@@ -51,8 +53,10 @@ EventRepository.prototype.getLocations = async (req, res) => {
  */
 EventRepository.prototype.getEvents = async (req, res) => {
 	try {
+		const events = EventData.alarms;
 		res.status(200).json({
-			message: 'No event found in the system.'
+			message: 'No event found in the system.',
+			payload: events
 		})
 	} catch (err) {
 		console.error(err)
