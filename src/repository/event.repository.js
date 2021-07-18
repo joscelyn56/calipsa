@@ -38,6 +38,7 @@ EventRepository.prototype.getLocations = async (req, res) => {
 	try {
 		const offset = (page === 1) ? 0 : (page - 1) * limit;
 		const end = offset + limit;
+		
 		const locations = EventData.locations;
 		const selectedLocations = locations.slice(offset, end)
 		
@@ -70,10 +71,18 @@ EventRepository.prototype.getEvents = async (req, res) => {
 	let page = parseInt(req.query.page) || 1
 	
 	try {
+		const offset = (page === 1) ? 0 : (page - 1) * limit;
+		const end = offset + limit;
+		
 		const events = EventData.alarms;
+		const selectedEvents = events.slice(offset, end)
+		
+		let pagination = Utils.paginate(events.length, page, limit)
+		
 		if (events.length > 0)
 			return res.status(200).json({
-				payload: events
+				payload: selectedEvents,
+				pagination
 			})
 		return res.status(200).json({
 			message: 'No event found in the system.',
