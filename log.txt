@@ -1,3 +1,0 @@
-Sun Jul 18 2021 23:14:40 GMT+0100 (West Africa Standard Time): http://localhost:7000/locations - user 60f4923c171b5d33cbd36f68
-Sun Jul 18 2021 23:14:49 GMT+0100 (West Africa Standard Time): http://localhost:7000/locations - user 60f4923c171b5d33cbd36f68
-Sun Jul 18 2021 23:14:58 GMT+0100 (West Africa Standard Time): http://localhost:7000/locations?page=5 - user 60f4923c171b5d33cbd36f68
