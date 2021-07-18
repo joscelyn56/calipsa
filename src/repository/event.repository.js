@@ -34,12 +34,14 @@ function EventRepository() {
 EventRepository.prototype.getLocations = async (req, res) => {
 	let limit = parseInt(req.query.limit) || 25
 	let page = parseInt(req.query.page) || 1
+	let search = req.query.search
 	
 	try {
 		const offset = (page === 1) ? 0 : (page - 1) * limit;
 		const end = offset + limit;
 		
-		const locations = EventData.locations;
+		let locations = EventData.locations;
+		if (search) locations = locations.filter(locations => locations.name.toLowerCase().includes(search.toLowerCase()))
 		const selectedLocations = locations.slice(offset, end)
 		
 		let pagination = Utils.paginate(locations.length, page, limit)
