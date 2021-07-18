@@ -2,3 +2,4 @@
 /public
 .env
 package-lock.json
+*.xml
