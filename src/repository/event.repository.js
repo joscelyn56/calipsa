@@ -59,10 +59,10 @@ EventRepository.prototype.getEvents = async (req, res) => {
 	try {
 		const events = EventData.alarms;
 		if (events.length > 0)
-			res.status(200).json({
+			return res.status(200).json({
 				payload: events
 			})
-		res.status(200).json({
+		return res.status(200).json({
 			message: 'No event found in the system.',
 			payload: []
 		})
