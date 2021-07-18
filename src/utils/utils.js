@@ -85,7 +85,7 @@ function hashString(data) {
  * @returns {boolean}
  */
 function compareHashedString(data, hash) {
-	return (bcrypt.compareSync(data, hash)) ? true : false
+	return !!(bcrypt.compareSync(data, hash))
 }
 
 function paginate(total, page, limit) {
@@ -96,7 +96,7 @@ function paginate(total, page, limit) {
 	let offset = (page === 1) ? 0 : (page - 1) * limit
 	
 	return {
-		offset,
+		total,
 		limit,
 		current_page: page,
 		next_page,
