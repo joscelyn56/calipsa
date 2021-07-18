@@ -25,6 +25,7 @@ verifyToken = (req, res, next) => {
 			})
 		}
 		req.user = decoded.id
+		req.name = decoded.name
 		next()
 	})
 }

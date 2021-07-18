@@ -91,7 +91,8 @@ AuthRepository.prototype.signin = async (req, res) => {
 			user.save()
 			
 			let token = jwt.sign({
-				id: user._id
+				id: user._id,
+				name: user.name
 			}, config.secret, {
 				expiresIn: 86400 // expires in 24 hours
 			})
