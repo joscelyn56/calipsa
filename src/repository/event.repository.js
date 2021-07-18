@@ -41,7 +41,7 @@ EventRepository.prototype.getLocations = async (req, res) => {
 		const end = offset + limit;
 		
 		let locations = EventData.locations;
-		if (search) locations = locations.filter(locations => locations.name.toLowerCase().includes(search.toLowerCase()))
+		if (search) locations = locations.filter(location => location.name.toLowerCase().includes(search.toLowerCase()))
 		const selectedLocations = locations.slice(offset, end)
 		
 		let pagination = Utils.paginate(locations.length, page, limit)
@@ -71,12 +71,43 @@ EventRepository.prototype.getLocations = async (req, res) => {
 EventRepository.prototype.getEvents = async (req, res) => {
 	let limit = parseInt(req.query.limit) || 25
 	let page = parseInt(req.query.page) || 1
+	let location = req.query.location
+	let outcome = req.query.outcome
+	let start_time = req.query.start_time
+	let end_time = req.query.end_time
 	
 	try {
 		const offset = (page === 1) ? 0 : (page - 1) * limit;
 		const end = offset + limit;
 		
-		const events = EventData.alarms;
+		let events = EventData.alarms;
+		
+		if (location) events = events.filter(event => event.location == location)
+		if (outcome) {
+			events = events.filter(event => {
+				if (outcome === "true")
+					return event.outcome === true
+				if (outcome === "false")
+					return event.outcome === false
+			})
+		}
+		if (start_time) {
+			let startDateTime = new Date(start_time)
+			
+			events = events.filter(event => {
+				const eventDateTime = new Date(event.timestamp)
+				return eventDateTime >= startDateTime
+			})
+		}
+		if (end_time) {
+			let endDateTime = new Date(end_time)
+			
+			events = events.filter(event => {
+				const eventDateTime = new Date(event.timestamp)
+				return eventDateTime <= endDateTime
+			})
+		}
+		
 		const selectedEvents = events.slice(offset, end)
 		
 		let pagination = Utils.paginate(events.length, page, limit)
