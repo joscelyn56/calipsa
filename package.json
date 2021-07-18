@@ -1,0 +1,38 @@
+{
+  "name": "callipsa_test",
+  "version": "1.0.0",
+  "description": "Callipsa Test",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "test",
+    "callipsa"
+  ],
+  "author": "Okwu J. Kinikachi",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
+    "dateformat": "^3.0.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.8.0",
+    "mongoose-paginate": "^5.0.3",
+    "nock": "^9.6.1",
+    "nodemon": "^2.0.2",
+    "npm": "^6.13.7",
+    "sinon": "^6.2.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "jest": "^25.0.0",
+    "moxios": "^0.4.0",
+    "supertest": "^3.2.0"
+  }
+}
