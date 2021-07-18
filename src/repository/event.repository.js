@@ -34,9 +34,13 @@ function EventRepository() {
 EventRepository.prototype.getLocations = async (req, res) => {
 	try {
 		const locations = EventData.locations;
+		if (locations.length > 0)
+			return res.status(200).json({
+				payload: locations
+			})
 		return res.status(200).json({
 			message: "No locations found in the system.",
-			payload: locations
+			payload: []
 		})
 	} catch (err) {
 		console.error(err)
@@ -54,9 +58,13 @@ EventRepository.prototype.getLocations = async (req, res) => {
 EventRepository.prototype.getEvents = async (req, res) => {
 	try {
 		const events = EventData.alarms;
+		if (events.length > 0)
+			res.status(200).json({
+				payload: events
+			})
 		res.status(200).json({
 			message: 'No event found in the system.',
-			payload: events
+			payload: []
 		})
 	} catch (err) {
 		console.error(err)
