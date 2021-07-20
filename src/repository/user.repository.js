@@ -99,6 +99,9 @@ AuthRepository.prototype.signin = async (req, res) => {
 			
 			return res.status(200).json({
 				token: token,
+				user: {
+					name: user.name
+				},
 				message: 'Login successful.'
 			})
 		}
